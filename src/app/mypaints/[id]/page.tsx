@@ -28,15 +28,11 @@ export default async function PaintDetailsPage({ params }: RouteParams) {
     <>
       <h3>Paint details</h3>
       {res.rows.map((productDetails: ProductDetails) => (
-        <ul>
-          <p key={productDetails.name}>paint name is {productDetails.name}</p>
-          {/* <p key={productDetails.id}>paint id is {productDetails.id}</p>
-          <p key={productDetails.category_id}>
-            paint category_id is {productDetails.category_id}
-          </p>
-          <p key={productDetails.brand_id}>
-            paint brand_id is {productDetails.brand_id}
-          </p> */}
+        <ul key={productDetails.id}>
+          <p>paint name is {productDetails.name}</p>
+          <p>paint id is {productDetails.id}</p>
+          <p>paint category_id is {productDetails.category_id}</p>
+          <p>paint brand_id is {productDetails.brand_id}</p>
         </ul>
       ))}
     </>
