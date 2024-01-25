@@ -1,3 +1,4 @@
+import Dropdown from "@/components/dropdown";
 import { db } from "@/lib/db";
 import Link from "next/link";
 
@@ -35,6 +36,7 @@ GROUP BY products.id, products.name, categories.product_type, brand.brand_name, 
   return (
     <>
       <h2>MyPaints</h2>
+      <Dropdown />
       {res.rows.map((paintObj: PaintObj) => (
         <Link href={`/mypaints/${paintObj.id}`} key={paintObj.id}>
           {paintObj.name}
