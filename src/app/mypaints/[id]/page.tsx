@@ -30,13 +30,13 @@ export default async function PaintDetailsPage({ params }: RouteParams) {
       {res.rows.map((productDetails: ProductDetails) => (
         <ul>
           <p key={productDetails.name}>paint name is {productDetails.name}</p>
-          <p key={productDetails.id}>paint id is {productDetails.id}</p>
+          {/* <p key={productDetails.id}>paint id is {productDetails.id}</p>
           <p key={productDetails.category_id}>
             paint category_id is {productDetails.category_id}
           </p>
           <p key={productDetails.brand_id}>
             paint brand_id is {productDetails.brand_id}
-          </p>
+          </p> */}
         </ul>
       ))}
     </>
