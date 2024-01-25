@@ -29,7 +29,7 @@ JOIN brand ON products.brand_id = brand.id
 JOIN company ON brand.company_id = company.id
 JOIN product_color_junction ON products.id = product_color_junction.product_id
 JOIN colors ON product_color_junction.color_id = colors.id
-GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`); // call the api
+GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`); //
   console.log(res.rows);
 
   // map through retreived data and populate map
