@@ -1,6 +1,8 @@
 import { db } from "@/lib/db";
+import Link from "next/link";
 
 interface PaintObj {
+  id: number;
   name: string;
   product_type: string;
   brand_name: string;
@@ -14,6 +16,7 @@ export default async function MyPaints() {
 
   //pg uses sql queries rather than a fetch
   const res = await db.query(`SELECT 
+  products.id,
   products.name, 
   categories.product_type, 
   brand.brand_name,      
@@ -25,7 +28,7 @@ JOIN brand ON products.brand_id = brand.id
 JOIN company ON brand.company_id = company.id
 JOIN product_color_junction ON products.id = product_color_junction.product_id
 JOIN colors ON product_color_junction.color_id = colors.id
-GROUP BY products.name, categories.product_type, brand.brand_name, company.company_name`); // call the api
+GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`); // call the api
   console.log(res.rows);
 
   // map through retreived data and populate map
@@ -33,7 +36,9 @@ GROUP BY products.name, categories.product_type, brand.brand_name, company.compa
     <>
       <h2>MyPaints</h2>
       {res.rows.map((paintObj: PaintObj) => (
-        <li key={paintObj.name}>{paintObj.name}</li>
+        <Link href={`/mypaints/${paintObj.id}`} key={paintObj.id}>
+          {paintObj.name}
+        </Link>
       ))}
     </>
   );
