@@ -1,23 +1,24 @@
+import { revalidatePath } from "next/cache";
 import pg from "pg";
 
-import { revalidatePath } from "next/cache";
+import SaveButton from "@/components/saveButton";
+
+// import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { FormEvent } from "react";
 
 export default function AddPaint() {
   //counts as server actions
-  //FormData is an infered type as and provided by typescript so does not need declareing
-  async function handleAddPaint(formData: FormData) {
+  async function handleAddPaint(formData) {
     "use server";
     // get form data
-    const paintNameValue = formData.get("paintName");
-    console.log(paintNameValue);
+    const paintName = formData.get("paintName");
+    console.log(paintName);
 
     // await pg`INSERT INTO databasename (column1, column2) VALUES (${value}, ${value})`;
 
     // revalidatePath("/path")
 
-    // redirect("/");
+    redirect("/");
   }
 
   return (
@@ -27,6 +28,7 @@ export default function AddPaint() {
         <label htmlFor="paintName"> Name</label>
         <input name="paintName" id="paintNameInput" placeholder="Name" />
       </form>
+      <SaveButton />
     </div>
   );
 }
