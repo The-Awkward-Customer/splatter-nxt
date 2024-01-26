@@ -1,12 +1,22 @@
 "use client";
-import React, { useState } from "react";
 
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+
+//this now uses url routing
 export default function Dropdown() {
-  const [selectedOption, setSelectedOption] = useState("option 1");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const search = searchParams?.get("sort") ?? undefined; // ? is… optional chaining | sort is the key which be string, null or undefined | ?? is nullish coelesence
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
+    // useSearchParams(event.target.value);
+    const selectedValue = event.target.value;
+    router.push(`?sort=${selectedValue}`);
   };
+
+  const asc = "asc";
+  const desc = "desc";
 
   return (
     <>
@@ -14,17 +24,18 @@ export default function Dropdown() {
       <select
         name="thing"
         id="thing-select"
-        value={selectedOption}
+        value={search}
         onChange={handleChange}
       >
-        <option value="option 1">option 1</option>
-        <option value="option 2">option 2</option>
-        <option value="option 3">option 3</option>
-        <option value="option 4">option 4</option>
-        <option value="option 5">option 5</option>
+        <option value={asc}>ascending</option>
+        <option value={desc}>descending</option>
       </select>
-
-      <p>the value is: {selectedOption}</p>
     </>
   );
 }
+
+// const [selectedOption, setSelectedOption] = useState("option 1");
+
+// const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+//   setSelectedOption(event.target.value);
+// };

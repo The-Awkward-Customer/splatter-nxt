@@ -11,11 +11,15 @@ interface PaintObj {
   colors: string;
 }
 
-export default async function MyPaints() {
-  //api call
-  //fetch await (function needs to be async)
+interface Params {
+  searchParams: { sort?: string }; // ? is a shortcut for undefined
+}
+
+export default async function MyPaints({ searchParams }: Params) {
+  console.log(searchParams);
 
   //pg uses sql queries rather than a fetch
+  // set order here
   const res = await db.query(`SELECT 
   products.id,
   products.name, 
@@ -23,16 +27,19 @@ export default async function MyPaints() {
   brand.brand_name,      
   company.company_name, 
   STRING_AGG(colors.color, ', ' ORDER BY colors.color) AS colors
-FROM products
-JOIN categories ON products.category_id = categories.id
-JOIN brand ON products.brand_id = brand.id
-JOIN company ON brand.company_id = company.id
-JOIN product_color_junction ON products.id = product_color_junction.product_id
-JOIN colors ON product_color_junction.color_id = colors.id
-GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`); //
-  console.log(res.rows);
+  FROM products
+  JOIN categories ON products.category_id = categories.id
+  JOIN brand ON products.brand_id = brand.id
+  JOIN company ON brand.company_id = company.id
+  JOIN product_color_junction ON products.id = product_color_junction.product_id
+  JOIN colors ON product_color_junction.color_id = colors.id
+  GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`); //
 
   // map through retreived data and populate map
+  if (searchParams.sort === "desc") {
+    res.rows.reverse();
+  }
+
   return (
     <>
       <h2>MyPaints</h2>
