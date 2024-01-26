@@ -1,8 +1,6 @@
 import { revalidatePath } from "next/cache";
 import pg from "pg";
 
-import SaveButton from "@/components/saveButton";
-
 // import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -28,7 +26,6 @@ export default function AddPaint() {
         <label htmlFor="paintName"> Name</label>
         <input name="paintName" id="paintNameInput" placeholder="Name" />
       </form>
-      <SaveButton />
     </div>
   );
 }
