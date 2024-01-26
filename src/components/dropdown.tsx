@@ -1,6 +1,6 @@
 "use client";
-
 import { useSearchParams, useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 //this now uses url routing
 export default function Dropdown() {
@@ -15,6 +15,7 @@ export default function Dropdown() {
     router.push(`?sort=${selectedValue}`);
   };
 
+  revalidatePath("/mypaints");
   return (
     <>
       <label htmlFor="something-select">choose a thing</label>
@@ -26,8 +27,10 @@ export default function Dropdown() {
       >
         <option value="product.name">Name</option>
         <option value="brand.brand_name">Brand</option>
-        <option value="categories.product_type">Product</option>
+        <option value="categories.product_type">Product Type</option>
         <option value="colors">Color</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descendig</option>
       </select>
     </>
   );
