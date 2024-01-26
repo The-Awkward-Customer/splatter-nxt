@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default function AddPaint() {
   //counts as server actions
-  async function handleAddPaint(formData) {
+  async function handleAddPaint(formData: FormData) {
     "use server";
     // get form data
     const paintName = formData.get("paintName");
