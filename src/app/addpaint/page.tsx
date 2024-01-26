@@ -1,14 +1,12 @@
 import { revalidatePath } from "next/cache";
 import pg from "pg";
 
-import SaveButton from "@/components/saveButton";
-
 // import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export default function AddPaint() {
   //counts as server actions
-  async function handleAddPaint(formData) {
+  async function handleAddPaint(formData: FormData) {
     "use server";
     // get form data
     const paintName = formData.get("paintName");
@@ -28,7 +26,6 @@ export default function AddPaint() {
         <label htmlFor="paintName"> Name</label>
         <input name="paintName" id="paintNameInput" placeholder="Name" />
       </form>
-      <SaveButton />
     </div>
   );
 }
