@@ -1,7 +1,5 @@
 import pg from "pg";
 
-import SaveButton from "@/components/savebutton";
-
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { FormEvent } from "react";
@@ -28,7 +26,6 @@ export default function AddPaint() {
       <form id="paintInputForm" action={handleAddPaint}>
         <label htmlFor="paintName"> Name</label>
         <input name="paintName" id="paintNameInput" placeholder="Name" />
-        <SaveButton />
       </form>
     </div>
   );
