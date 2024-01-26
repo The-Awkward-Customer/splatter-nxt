@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 //this now uses url routing
 export default function Dropdown() {
@@ -15,9 +15,6 @@ export default function Dropdown() {
     router.push(`?sort=${selectedValue}`);
   };
 
-  const asc = "asc";
-  const desc = "desc";
-
   return (
     <>
       <label htmlFor="something-select">choose a thing</label>
@@ -27,8 +24,10 @@ export default function Dropdown() {
         value={search}
         onChange={handleChange}
       >
-        <option value={asc}>ascending</option>
-        <option value={desc}>descending</option>
+        <option value="product.name">Name</option>
+        <option value="brand.brand_name">Brand</option>
+        <option value="categories.product_type">Product</option>
+        <option value="colors">Color</option>
       </select>
     </>
   );

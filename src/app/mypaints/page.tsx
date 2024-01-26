@@ -12,15 +12,14 @@ interface PaintObj {
 }
 
 interface Params {
-  searchParams: { sort?: string }; // ? is a shortcut for undefined
+  searchParams: { sort?: string; sortBy?: string; order?: string }; // ? is a shortcut for undefined
 }
 
 export default async function MyPaints({ searchParams }: Params) {
   console.log(searchParams);
 
-  //pg uses sql queries rather than a fetch
-  // set order here
-  const res = await db.query(`SELECT 
+  //we declare the query as a let variable
+  let sqlQuery = `SELECT 
   products.id,
   products.name, 
   categories.product_type, 
@@ -33,12 +32,28 @@ export default async function MyPaints({ searchParams }: Params) {
   JOIN company ON brand.company_id = company.id
   JOIN product_color_junction ON products.id = product_color_junction.product_id
   JOIN colors ON product_color_junction.color_id = colors.id
-  GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`); //
+  GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`;
+
+  const validSortColumns = [
+    "products.name",
+    "brand.brand_name",
+    "categories.product_name",
+    "colors",
+  ];
+
+  // Add sorting to the SQL query based on searchParams
+  if (validSortColumns.includes(searchParams.sort || "")) {
+    // Ensure that the sortBy parameter is a valid column name to prevent SQL injection
+    sqlQuery += ` ORDER BY ${searchParams.sort}`;
+  }
+
+  console.log(sqlQuery);
+  const res = await db.query(sqlQuery); // uses sqlQuery
 
   // map through retreived data and populate map
-  if (searchParams.sort === "desc") {
-    res.rows.reverse();
-  }
+  // if (searchParams.sort === "desc") {
+  //   res.rows.reverse();
+  // }
 
   return (
     <>
