@@ -1,7 +1,5 @@
+import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import pg from "pg";
-
-// import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export default function AddPaint() {
@@ -12,11 +10,14 @@ export default function AddPaint() {
     const paintName = formData.get("paintName");
     console.log(paintName);
 
-    // await pg`INSERT INTO databasename (column1, column2) VALUES (${value}, ${value})`;
+    let sqlInsert = `INSERT INTO comments (product_id, comment_text)
+    values
+    (2, 'A yellow-green color great for highlighting a desaurated green.')`;
+    const req = await db.query(sqlInsert);
 
     // revalidatePath("/path")
 
-    redirect("/");
+    // redirect("/");
   }
 
   return (
@@ -25,6 +26,7 @@ export default function AddPaint() {
       <form id="paintInputForm" action={handleAddPaint}>
         <label htmlFor="paintName"> Name</label>
         <input name="paintName" id="paintNameInput" placeholder="Name" />
+        <button>submit</button>
       </form>
     </div>
   );

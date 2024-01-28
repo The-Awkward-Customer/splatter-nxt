@@ -15,8 +15,6 @@ export default function Dropdown() {
     router.push(`?sort=${selectedValue}`);
   };
 
-  // revalidatePath("/mypaints");
-
   return (
     <>
       <label htmlFor="something-select">choose a thing</label>
