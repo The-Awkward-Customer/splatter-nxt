@@ -1,6 +1,5 @@
 import Dropdown from "@/components/dropdown";
 import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
 interface PaintObj {
@@ -56,8 +55,6 @@ export default async function MyPaints({ searchParams }: Params) {
   //   res.rows.reverse();
   // }
 
-  revalidatePath("/mypaints");
-
   return (
     <>
       <h2>MyPaints</h2>
@@ -65,9 +62,10 @@ export default async function MyPaints({ searchParams }: Params) {
       {res.rows.map((paintObj: PaintObj) => (
         <div key={paintObj.id}>
           <Link href={`/mypaints/${paintObj.id}`}>{paintObj.name}</Link>
-          <p>Brand: {paintObj.brand_name}</p>
-          <p>Product type: {paintObj.product_type}</p>
-          <p>Colors: {paintObj.colors}</p>
+          <p>{paintObj.colors}</p>
+          <p>{paintObj.product_type}</p>
+          <p>{paintObj.brand_name}</p>
+          <p>{paintObj.company_name}</p>
         </div>
       ))}
     </>
