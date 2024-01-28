@@ -1,6 +1,6 @@
 "use client";
-
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 //this now uses url routing
 export default function Dropdown() {
@@ -15,8 +15,7 @@ export default function Dropdown() {
     router.push(`?sort=${selectedValue}`);
   };
 
-  const asc = "asc";
-  const desc = "desc";
+  // revalidatePath("/mypaints");
 
   return (
     <>
@@ -27,8 +26,12 @@ export default function Dropdown() {
         value={search}
         onChange={handleChange}
       >
-        <option value={asc}>ascending</option>
-        <option value={desc}>descending</option>
+        <option value="product.name">Name</option>
+        <option value="brand.brand_name">Brand</option>
+        <option value="categories.product_type">Product Type</option>
+        <option value="colors">Color</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descendig</option>
       </select>
     </>
   );
