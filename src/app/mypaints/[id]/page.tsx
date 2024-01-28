@@ -31,7 +31,7 @@ export default async function PaintDetailsPage({ params }: RouteParams) {
   const details = await loadDetails(params.id);
   console.log(details);
 
-  async function onSubmit(formData: FormData, id: string) {
+  async function onSubmit(formData: FormData) {
     "use server";
     console.log("hello");
     const comment = formData.get("comment");
