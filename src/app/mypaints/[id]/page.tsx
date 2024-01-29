@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { FormEvent } from "react";
 import { redirect } from "next/navigation";
 
 interface ProductDetails {
@@ -20,35 +19,48 @@ interface RouteParams {
 
 export default async function PaintDetailsPage({ params }: RouteParams) {
   //loadDetails
-  async function loadDetails(id: string) {
-    let sql = `SELECT * FROM products WHERE id = $1`;
+  // async function loadDetails(id: string) {
+  let sql = `SELECT * FROM products WHERE id = $1`;
 
-    let sqlQuery = `SELECT 
+  let sqlQuery = `
+  SELECT
     products.id,
-    products.name, 
-    categories.product_type, 
-    brand.brand_name,      
-    company.company_name, 
-    STRING_AGG(colors.color, ', ' ORDER BY colors.color) AS colors,
-    STRING_AGG(comments.comment_text, ' | ' ORDER BY comments.created_at DESC) AS comments
-FROM products
-JOIN categories ON products.category_id = categories.id
-JOIN brand ON products.brand_id = brand.id
-JOIN company ON brand.company_id = company.id
-JOIN product_color_junction ON products.id = product_color_junction.product_id
-JOIN colors ON product_color_junction.color_id = colors.id
-LEFT JOIN comments ON products.id = comments.product_id
-WHERE products.id = $1
-GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name
+    products.name,
+    categories.product_type,
+    brand.brand_name,
+    company.company_name,
+    string_agg(
+      colors.color,
+      ', '
+      ORDER by
+        colors.color
+    ) AS colors,
+    string_agg(distinct comments.comment_text, ' | ') AS comments
+  FROM
+    products
+    join categories on products.category_id = categories.id
+    join brand on products.brand_id = brand.id
+    join company on brand.company_id = company.id
+    join product_color_junction on products.id = product_color_junction.product_id
+    join colors on product_color_junction.color_id = colors.id
+    left join comments on products.id = comments.product_id
+  WHERE
+    products.id = $1
+  GROUP by
+    products.id,
+    products.name,
+    categories.product_type,
+    brand.brand_name,
+    company.company_name
 `;
 
-    console.log(id);
-    const res = await db.query(sqlQuery, [id]); // Parametised to secure against sql injectio (chatGPT reminded me)
-    console.log(res.rows);
-    return res.rows;
-  }
+  console.log(params.id);
+  const details = await db.query(sqlQuery, [params.id]); // Parametised to secure against sql injectio (chatGPT reminded me)
+  console.log(details.rows);
+  //   return res.rows;
+  // }
   // call loadDetails and pass params.id
-  const details = await loadDetails(params.id);
+  // const details = await loadDetails(params.id);
   console.log(details);
 
   // handles submit
@@ -70,7 +82,7 @@ GROUP BY products.id, products.name, categories.product_type, brand.brand_name, 
   return (
     <>
       <h3>Paint details</h3>
-      {details.map((productDetails: ProductDetails) => (
+      {details.rows.map((productDetails: ProductDetails) => (
         <ul key={productDetails.id}>
           <p>paint name is {productDetails.name}</p>
           <p>paint id is {productDetails.id}</p>

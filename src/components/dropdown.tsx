@@ -34,9 +34,3 @@ export default function Dropdown() {
     </>
   );
 }
-
-// const [selectedOption, setSelectedOption] = useState("option 1");
-
-// const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//   setSelectedOption(event.target.value);
-// };
