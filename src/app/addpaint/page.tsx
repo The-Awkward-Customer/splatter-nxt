@@ -7,25 +7,21 @@ export default function AddPaint() {
   async function handleAddPaint(formData: FormData) {
     "use server";
     // get form data
-    const paintName = formData.get("paintName");
-    console.log(paintName);
+    const comment = formData.get("comment");
+    console.log(comment);
 
     let sqlInsert = `INSERT INTO comments (product_id, comment_text)
     values
-    (2, 'A yellow-green color great for highlighting a desaurated green.')`;
+    (${}, ${comment})`;
     const req = await db.query(sqlInsert);
-
-    // revalidatePath("/path")
-
-    // redirect("/");
   }
 
   return (
     <div>
       <h2>add a paint</h2>
-      <form id="paintInputForm" action={handleAddPaint}>
+      <form id="commentForm" action={handleAddPaint}>
         <label htmlFor="paintName"> Name</label>
-        <input name="paintName" id="paintNameInput" placeholder="Name" />
+        <input name="comment" id="commentInput" placeholder="Add a comment" />
         <button>submit</button>
       </form>
     </div>
