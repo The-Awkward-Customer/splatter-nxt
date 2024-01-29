@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { FormEvent } from "react";
+import { redirect } from "next/navigation";
 
 interface ProductDetails {
   id: number;
@@ -62,7 +63,8 @@ GROUP BY products.id, products.name, categories.product_type, brand.brand_name, 
     await db.query(sqlInsert, [params.id, comment]);
     console.log(`Id: ${params.id}, Comment: ${comment}`);
 
-    revalidatePath(`/mypaints${params.id}`);
+    revalidatePath(`/mypaints/${params.id}`);
+    redirect(`/mypaints/${params.id}`);
   }
 
   return (
