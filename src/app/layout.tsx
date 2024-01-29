@@ -11,11 +11,16 @@ export const metadata: Metadata = {
   description: "Track and curate your paint collection",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = auth();
+  const user = await currentUser();
+
+  console.log(userId);
+  console.log(user);
   return (
     <ClerkProvider>
       <html lang="en">
