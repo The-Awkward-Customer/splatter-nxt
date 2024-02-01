@@ -1,25 +1,16 @@
+"use client";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import "./navigation.css";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Navigation() {
   return (
-    <>
+    <section className="NavigationWrapper">
+      <h1>Splatter</h1>
       <NavigationMenu.Root>
-        <NavigationMenu.List>
-          <NavigationMenu.Item>
-            <NavigationMenu.Trigger>Item one</NavigationMenu.Trigger>
-            <NavigationMenu.Content>Item one content</NavigationMenu.Content>
-          </NavigationMenu.Item>
-          <NavigationMenu.Item>
-            <NavigationMenu.Trigger>Item two</NavigationMenu.Trigger>
-            <NavigationMenu.Content>Item two content</NavigationMenu.Content>
-          </NavigationMenu.Item>
-
-          <NavigationMenu.Indicator className="NavigationMenuIndicator" />
-        </NavigationMenu.List>
-
-        <NavigationMenu.Viewport />
+        <NavigationMenu.Link href="/mypaints">My paints</NavigationMenu.Link>
       </NavigationMenu.Root>
-    </>
+      <UserButton afterSignOutUrl="/" />
+    </section>
   );
 }

@@ -1,7 +1,36 @@
+.NavigationWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.NavigationMenuRoot {
+  background-color: lightblue;
+}
+
+.NavigationMenuList {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  background-color: lightcoral;
+  list-style-type: none;
+}
+
+.NavigationMenuTrigger {
+  background-color: lightgreen;
+}
+
+.NavigationMenuContent {
+  background-color: lemonchiffon;
+}
+
 .NavigationMenuIndicator {
   background-color: rgb(2, 175, 255);
 }
 .NavigationMenuIndicator[data-orientation="horizontal"] {
   height: 3px;
   transition: width, transform, 250ms ease;
+}
+
+.NavigationMenuViewPort {
+  background-color: blueviolet;
 }
