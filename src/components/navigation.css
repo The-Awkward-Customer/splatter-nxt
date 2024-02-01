@@ -1,6 +1,14 @@
 .NavigationWrapper {
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 32px;
+}
+
+.NavigationHeader {
+  font-size: 16px;
 }
 
 .NavigationMenuRoot {
@@ -13,6 +21,9 @@
   gap: 24px;
   background-color: lightcoral;
   list-style-type: none;
+}
+
+.NavigationLink {
 }
 
 .NavigationMenuTrigger {
