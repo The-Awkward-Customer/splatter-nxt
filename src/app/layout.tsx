@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { ClerkProvider, UserButton, auth, currentUser } from "@clerk/nextjs";
 
 import "./globals.css";
-import Navigation from "@/components/navigation";
+import Navigation from "@/components/navigation/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +26,7 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Navigation />
+          <Navigation userId={userId} />
           {children}
         </body>
       </html>
