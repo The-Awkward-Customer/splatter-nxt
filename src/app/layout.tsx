@@ -25,6 +25,10 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
+          <script
+            type="module"
+            src="https://unpkg.com/@splinetool/viewer@1.0.42/build/spline-viewer.js"
+          ></script>
           <UserButton afterSignOutUrl="/" />
           {children}
         </body>
