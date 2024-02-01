@@ -1,6 +1,7 @@
 import Dropdown from "@/components/dropdown";
 import { db } from "@/lib/db";
 import Link from "next/link";
+import ListItem from "@/components/listItem/listitem";
 
 interface PaintObj {
   id: number;
@@ -59,14 +60,15 @@ export default async function MyPaints({ searchParams }: Params) {
     <>
       <h2>MyPaints</h2>
       <Dropdown />
+
       {res.rows.map((paintObj: PaintObj) => (
-        <div key={paintObj.id}>
-          <Link href={`/mypaints/${paintObj.id}`}>{paintObj.name}</Link>
-          <p>{paintObj.colors}</p>
-          <p>{paintObj.product_type}</p>
-          <p>{paintObj.brand_name}</p>
-          <p>{paintObj.company_name}</p>
-        </div>
+        <ListItem
+          id={paintObj.id}
+          name={paintObj.name}
+          color={paintObj.colors}
+          product={paintObj.product_type}
+          brand={paintObj.brand_name}
+        />
       ))}
     </>
   );
