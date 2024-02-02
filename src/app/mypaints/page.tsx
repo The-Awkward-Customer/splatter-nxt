@@ -59,8 +59,8 @@ export default async function MyPaints({ searchParams }: Params) {
       <h2>MyPaints</h2>
       {/* <Dropdown /> */}
 
-      <Selector />
       <Stack spacing={"m"}>
+        <Selector />
         {res.rows.map((paintObj: PaintObj) => (
           <ListItem
             key={paintObj.id + paintObj.name}
