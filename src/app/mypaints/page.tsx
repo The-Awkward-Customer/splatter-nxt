@@ -2,6 +2,7 @@ import Dropdown from "@/components/dropdown";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import ListItem from "@/components/listItem/listitem";
+import Selector from "@/components/select/select";
 
 interface PaintObj {
   id: number;
@@ -59,7 +60,8 @@ export default async function MyPaints({ searchParams }: Params) {
   return (
     <>
       <h2>MyPaints</h2>
-      <Dropdown />
+      {/* <Dropdown /> */}
+      <Selector />
 
       {res.rows.map((paintObj: PaintObj) => (
         <ListItem

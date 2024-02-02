@@ -1,38 +1,46 @@
 "use client";
 import * as Select from "@radix-ui/react-select";
 import { CheckIcon } from "@radix-ui/react-icons";
+import { useSearchParams, useRouter } from "next/navigation";
 import "./select.css";
 
 export default function Selector() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const search = searchParams?.get("sort") ?? undefined; // ? is… optional chaining | sort is the key which be string, null or undefined | ?? is nullish coelesence
+
+  const handleChange = (value: string) => {
+    // useSearchParams(event.target.value);
+    router.push(`?sort=${value}`);
+    console.log("value is:");
+  };
+
   return (
-    <Select.Root>
+    <Select.Root onValueChange={handleChange}>
       <Select.Trigger className="SelectTrigger">
-        <Select.Value placeholder="Sort by…" />
+        <Select.Value placeholder="sort by…" />
         <Select.Icon className="SelectIcon" />
       </Select.Trigger>
 
       <Select.Portal>
         <Select.Content className="SelectContent" position="popper">
-          <Select.ScrollUpButton className="SelectScrollButton" />
           <Select.Viewport className="SelectViewport">
-            <Select.Item className="SelectItem" value="value1">
-              <Select.ItemText> Item One</Select.ItemText>
-              <Select.ItemIndicator className="SelectItemIndicator">
-                <CheckIcon />
-              </Select.ItemIndicator>
-            </Select.Item>
-
             <Select.Group>
+              <Select.Item className="SelectItem" value="colors">
+                <Select.ItemText> Color</Select.ItemText>
+                <Select.ItemIndicator className="SelectItemIndicator">
+                  <CheckIcon />
+                </Select.ItemIndicator>
+              </Select.Item>
               <Select.Label className="SelectLabel" />
-              <Select.Item className="SelectItem" value="value2">
-                <Select.ItemText>Item two</Select.ItemText>
+              <Select.Item className="SelectItem" value="brand.brand_name">
+                <Select.ItemText>Brand</Select.ItemText>
                 <Select.ItemIndicator className="SelectItemIndicator">
                   <CheckIcon />
                 </Select.ItemIndicator>
               </Select.Item>
             </Select.Group>
-
-            <Select.Separator />
           </Select.Viewport>
           <Select.ScrollDownButton />
           <Select.Arrow />
