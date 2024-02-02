@@ -13,7 +13,7 @@ export default function Selector() {
   const handleChange = (value: string) => {
     // useSearchParams(event.target.value);
     router.push(`?sort=${value}`);
-    console.log("value is:");
+    console.log(`value is: ${value}`);
   };
 
   return (
@@ -27,13 +27,18 @@ export default function Selector() {
         <Select.Content className="SelectContent" position="popper">
           <Select.Viewport className="SelectViewport">
             <Select.Group>
+              <Select.Item className="SelectItem" value="products.name">
+                <Select.ItemText>Name</Select.ItemText>
+                <Select.ItemIndicator className="SelectItemIndicator">
+                  <CheckIcon />
+                </Select.ItemIndicator>
+              </Select.Item>
               <Select.Item className="SelectItem" value="colors">
                 <Select.ItemText> Color</Select.ItemText>
                 <Select.ItemIndicator className="SelectItemIndicator">
                   <CheckIcon />
                 </Select.ItemIndicator>
               </Select.Item>
-              <Select.Label className="SelectLabel" />
               <Select.Item className="SelectItem" value="brand.brand_name">
                 <Select.ItemText>Brand</Select.ItemText>
                 <Select.ItemIndicator className="SelectItemIndicator">
@@ -42,7 +47,6 @@ export default function Selector() {
               </Select.Item>
             </Select.Group>
           </Select.Viewport>
-          <Select.ScrollDownButton />
           <Select.Arrow />
         </Select.Content>
       </Select.Portal>

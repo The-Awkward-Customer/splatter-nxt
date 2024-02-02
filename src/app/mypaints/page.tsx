@@ -36,12 +36,7 @@ export default async function MyPaints({ searchParams }: Params) {
   JOIN colors ON product_color_junction.color_id = colors.id
   GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`;
 
-  const validSortColumns = [
-    "products.name",
-    "brand.brand_name",
-    "categories.product_name",
-    "colors",
-  ];
+  const validSortColumns = ["products.name", "brand.brand_name", "colors"];
 
   // Add sorting to the SQL query based on searchParams
   if (validSortColumns.includes(searchParams.sort || "")) {
