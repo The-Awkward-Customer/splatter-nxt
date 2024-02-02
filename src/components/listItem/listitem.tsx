@@ -1,12 +1,22 @@
 import Link from "next/link";
+import "./listitem.css";
+import { Children, ReactNode } from "react";
+import { CheckCircledIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 
-export default function ListItem({ id, name, color, product, brand }: any) {
+export default function ListItem(
+  { id, name, color, product, brand }: any,
+  icon: ReactNode
+) {
   return (
-    <div key={id}>
-      <Link href={`/mypaints/${id}`}>{name}</Link>
-      <p>{color}</p>
-      <p>{product}</p>
-      <p>{brand}</p>
-    </div>
+    <Link href={`/mypaints/${id}`} key={id} className="ListItemLink">
+      <div className="ListItemContent">
+        <p className="ListItemTitle">{name}</p>
+        <p className="ListItemColors">{color}</p>
+        <p className="ListItemDetails">
+          {product} | {brand}
+        </p>
+      </div>
+      <ChevronRightIcon />
+    </Link>
   );
 }

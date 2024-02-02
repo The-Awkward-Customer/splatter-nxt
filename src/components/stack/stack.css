@@ -1,0 +1,17 @@
+.HStack {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.spacing-s {
+  gap: 4px;
+}
+.spacing-m {
+  gap: 12px;
+}
+.spacing-l {
+  gap: 24px;
+}

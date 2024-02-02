@@ -1,8 +1,10 @@
-import Dropdown from "@/components/dropdown";
+import Dropdown from "@/deprecating/dropdown";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import ListItem from "@/components/listItem/listitem";
 import Selector from "@/components/select/select";
+import { CheckCircledIcon } from "@radix-ui/react-icons";
+import Stack from "@/components/stack/stack";
 
 interface PaintObj {
   id: number;
@@ -56,18 +58,20 @@ export default async function MyPaints({ searchParams }: Params) {
     <>
       <h2>MyPaints</h2>
       {/* <Dropdown /> */}
-      <Selector />
 
-      {res.rows.map((paintObj: PaintObj) => (
-        <ListItem
-          key={paintObj.id + paintObj.name}
-          id={paintObj.id}
-          name={paintObj.name}
-          color={paintObj.colors}
-          product={paintObj.product_type}
-          brand={paintObj.brand_name}
-        />
-      ))}
+      <Selector />
+      <Stack spacing={"m"}>
+        {res.rows.map((paintObj: PaintObj) => (
+          <ListItem
+            key={paintObj.id + paintObj.name}
+            id={paintObj.id}
+            name={paintObj.name}
+            color={paintObj.colors}
+            product={paintObj.product_type}
+            brand={paintObj.brand_name}
+          />
+        ))}
+      </Stack>
     </>
   );
 }
