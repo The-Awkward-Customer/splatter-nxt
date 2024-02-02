@@ -1,6 +1,8 @@
 import Dropdown from "@/components/dropdown";
 import { db } from "@/lib/db";
 import Link from "next/link";
+import ListItem from "@/components/listItem/listitem";
+import Selector from "@/components/select/select";
 
 interface PaintObj {
   id: number;
@@ -34,12 +36,7 @@ export default async function MyPaints({ searchParams }: Params) {
   JOIN colors ON product_color_junction.color_id = colors.id
   GROUP BY products.id, products.name, categories.product_type, brand.brand_name, company.company_name`;
 
-  const validSortColumns = [
-    "products.name",
-    "brand.brand_name",
-    "categories.product_name",
-    "colors",
-  ];
+  const validSortColumns = ["products.name", "brand.brand_name", "colors"];
 
   // Add sorting to the SQL query based on searchParams
   if (validSortColumns.includes(searchParams.sort || "")) {
@@ -58,15 +55,18 @@ export default async function MyPaints({ searchParams }: Params) {
   return (
     <>
       <h2>MyPaints</h2>
-      <Dropdown />
+      {/* <Dropdown /> */}
+      <Selector />
+
       {res.rows.map((paintObj: PaintObj) => (
-        <div key={paintObj.id}>
-          <Link href={`/mypaints/${paintObj.id}`}>{paintObj.name}</Link>
-          <p>{paintObj.colors}</p>
-          <p>{paintObj.product_type}</p>
-          <p>{paintObj.brand_name}</p>
-          <p>{paintObj.company_name}</p>
-        </div>
+        <ListItem
+          key={paintObj.id + paintObj.name}
+          id={paintObj.id}
+          name={paintObj.name}
+          color={paintObj.colors}
+          product={paintObj.product_type}
+          brand={paintObj.brand_name}
+        />
       ))}
     </>
   );

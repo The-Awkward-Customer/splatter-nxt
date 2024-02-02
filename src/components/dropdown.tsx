@@ -1,6 +1,5 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 //this now uses url routing
 export default function Dropdown() {
