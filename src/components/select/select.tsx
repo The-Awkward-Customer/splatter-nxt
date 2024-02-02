@@ -27,19 +27,23 @@ export default function Selector() {
         <Select.Content className="SelectContent" position="popper">
           <Select.Viewport className="SelectViewport">
             <Select.Group>
-              <Select.Item className="SelectItem" value="products.name">
+              <Select.Item className="SelectItem" value="products.name" key={1}>
                 <Select.ItemText>Name</Select.ItemText>
                 <Select.ItemIndicator className="SelectItemIndicator">
                   <CheckIcon />
                 </Select.ItemIndicator>
               </Select.Item>
-              <Select.Item className="SelectItem" value="colors">
+              <Select.Item className="SelectItem" value="colors" key={2}>
                 <Select.ItemText> Color</Select.ItemText>
                 <Select.ItemIndicator className="SelectItemIndicator">
                   <CheckIcon />
                 </Select.ItemIndicator>
               </Select.Item>
-              <Select.Item className="SelectItem" value="brand.brand_name">
+              <Select.Item
+                className="SelectItem"
+                value="brand.brand_name"
+                key={3}
+              >
                 <Select.ItemText>Brand</Select.ItemText>
                 <Select.ItemIndicator className="SelectItemIndicator">
                   <CheckIcon />
