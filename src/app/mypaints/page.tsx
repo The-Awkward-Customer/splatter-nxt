@@ -60,6 +60,7 @@ export default async function MyPaints({ searchParams }: Params) {
 
       {res.rows.map((paintObj: PaintObj) => (
         <ListItem
+          key={paintObj.id + paintObj.name}
           id={paintObj.id}
           name={paintObj.name}
           color={paintObj.colors}
