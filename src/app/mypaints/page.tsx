@@ -5,6 +5,7 @@ import ListItem from "@/components/listItem/listitem";
 import Selector from "@/components/select/select";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import Stack from "@/components/stack/stack";
+import Button from "@/components/button/button";
 
 interface PaintObj {
   id: number;
@@ -46,18 +47,12 @@ export default async function MyPaints({ searchParams }: Params) {
     sqlQuery += ` ORDER BY ${searchParams.sort}`;
   }
 
-  console.log(sqlQuery);
   const res = await db.query(sqlQuery); // uses sqlQuery
-
-  // map through retreived data and populate map
-  // if (searchParams.sort === "desc") {
-  //   res.rows.reverse();
-  // }
 
   return (
     <>
       <h2>MyPaints</h2>
-      {/* <Dropdown /> */}
+      <Button route={"/addpaints"} />
 
       <Stack spacing={"m"}>
         <Selector />
