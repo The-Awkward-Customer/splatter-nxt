@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider, UserButton, auth, currentUser } from "@clerk/nextjs";
+import { CheckUser } from "@/lib/action";
 
 import "./globals.css";
 import Navigation from "@/components/navigation/navigation";
@@ -17,11 +18,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { userId } = auth();
-  const user = await currentUser();
+  // const { userId } = auth();
+  // const user = await currentUser();
 
+  const userId = await CheckUser();
   console.log(userId);
-  console.log(user);
+
   return (
     <ClerkProvider>
       <html lang="en">
