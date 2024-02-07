@@ -8,19 +8,33 @@ interface CheckboxPrimitiveProps {
   id: string;
   label?: string;
   value: string;
+  name: string;
+  asChild: boolean;
   checked?: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  required?: boolean;
+  onChange: (checked: boolean) => void;
 }
 
 export default function CheckboxPrimitive({
+  asChild,
   id,
   label,
   checked,
+  name,
+  value,
   onChange,
 }: CheckboxPrimitiveProps) {
   return (
     <div className="CheckboxPrimitiveContainer">
-      <Checkbox.Root className="CheckboxRoot" checked={checked}>
+      <Checkbox.Root
+        className="CheckboxRoot"
+        asChild={asChild}
+        checked={checked}
+        name={name}
+        value={value}
+        onCheckedChange={onChange}
+      >
         <Checkbox.Indicator className="CheckboxIndicator" id={id}>
           <CheckIcon />
         </Checkbox.Indicator>

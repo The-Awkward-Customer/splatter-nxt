@@ -1,6 +1,4 @@
 "use client";
-
-import { ReactNode } from "react";
 import Stack from "../stack/stack";
 import CheckboxPrimitive from "../checkbox/checkbox-primitive";
 import { useState, useEffect } from "react";
@@ -18,7 +16,7 @@ interface ChoiceListProps {
   onChange: (selectedValues: string[]) => void; // Handler to update the form state
 }
 
-export default function ChoiceList({
+export default function MultipleChoiceList({
   options,
   name,
   onChange,
@@ -33,28 +31,27 @@ export default function ChoiceList({
     onChange(selectedValues);
   }, [selectedValues, onChange]);
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    if (event.target.checked) {
+  // Adapting the handleCheckboxChange to fit CheckboxPrimitive's expected prop
+  const handleCheckboxChange = (value: string) => (checked: boolean) => {
+    if (checked) {
       setSelectedValues((current) => [...current, value]);
     } else {
       setSelectedValues((current) => current.filter((val) => val !== value));
     }
   };
 
-  // logic goes here
-  // call onchange used by form
-  //logic for handling choicelist state here
   return (
     <Stack spacing={"m"}>
       {options.map((option, index) => (
         <CheckboxPrimitive
+          asChild={true}
           key={index}
           label={option.label}
+          name={name}
           value={option.value}
           id={option.id}
           checked={selectedValues.includes(option.value)}
-          onChange={handleCheckboxChange}
+          onChange={handleCheckboxChange(option.value)}
         />
       ))}
     </Stack>
