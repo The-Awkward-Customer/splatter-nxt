@@ -1,9 +1,16 @@
-import { Children, ReactNode } from "react";
+import { ReactNode } from "react";
 import "./stack.css";
 
-export default function Stack({ children, spacing }: any) {
+type Spacing = "s" | "m" | "l" | "xl";
+
+interface StackProps {
+  children?: ReactNode;
+  spacing: Spacing; // Use the Spacing type here
+}
+
+export default function Stack({ children, spacing }: StackProps) {
   // A helper function to validate and return the spacing class
-  const getSpacingClass = (spacing: string) => {
+  const getSpacingClass = (spacing: Spacing) => {
     const allowedSpacings = ["s", "m", "l", "xl"];
     return allowedSpacings.includes(spacing) ? `spacing-${spacing}` : "";
   };

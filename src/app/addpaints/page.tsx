@@ -1,4 +1,4 @@
-import SimpleCheckbox from "@/components/checkbox/checkbox";
+import CheckboxPrimative from "@/components/checkbox/checkbox-primitive";
 import { db } from "@/lib/db";
 
 export default async function AddPaintsPage() {
@@ -13,11 +13,7 @@ export default async function AddPaintsPage() {
     <>
       <h2>Add paints to your profile</h2>
 
-      <SimpleCheckbox />
-
-      <form>
-        <button type="submit"> add paints</button>
-      </form>
+      <CheckboxPrimative id={"c1"} label="I am the label" />
     </>
   );
 }

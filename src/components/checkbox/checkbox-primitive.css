@@ -2,12 +2,8 @@
 button {
   all: unset;
 }
-.SimpleCheckboxForm {
-  display: flex;
-  flex-flow: column nowrap;
-}
 
-.SimpleCheckboxRow {
+.CheckboxPrimitiveContainer {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
