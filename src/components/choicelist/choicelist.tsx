@@ -13,23 +13,23 @@ interface CheckboxOptions {
 interface ChoiceListProps {
   options: CheckboxOptions[];
   name: string;
-  onChange: (selectedValues: string[]) => void; // Handler to update the form state
+  // onChange: (selectedValues: string[]) => void; // Handler to update the form state
 }
 
 export default function MultipleChoiceList({
   options,
   name,
-  onChange,
-}: ChoiceListProps) {
+}: // onChange,
+ChoiceListProps) {
   // State to track selected options
   const [selectedValues, setSelectedValues] = useState<string[]>(
     options.filter((option) => option.checked).map((option) => option.value)
   );
 
-  useEffect(() => {
-    // Invoke the passed onChange function whenever selectedValues changes
-    onChange(selectedValues);
-  }, [selectedValues, onChange]);
+  // useEffect(() => {
+  //   // Invoke the passed onChange function whenever selectedValues changes
+  //   onChange(selectedValues);
+  // }, [selectedValues, onChange]);
 
   // Adapting the handleCheckboxChange to fit CheckboxPrimitive's expected prop
   const handleCheckboxChange = (value: string) => (checked: boolean) => {

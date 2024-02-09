@@ -1,23 +1,18 @@
-import MultipleChoiceList from "@/components/choicelist/choicelist";
 import { db } from "@/lib/db";
 
 export default async function AddPaintsPage() {
-  let productQuery = `SELECT * FROM products`;
+  "use client";
+  let productQuery = `SELECT p.*, 
+  CASE 
+      WHEN upj.product_id IS NOT NULL THEN true
+      ELSE false
+  END AS hasProduct
+FROM products p
+LEFT JOIN user_products_junction upj ON p.id = upj.product_id AND upj.user_id = '41bb107e-dd83-40e6-bab4-3016d28e0996'
+`;
 
   const res = await db.query(productQuery); // uses sqlQuery
   const products = res.rows;
-
-  const dummyOptions = [
-    { label: "Acrylic Paint", value: "acrylic", checked: true, id: "1" },
-    { label: "Oil Paint", value: "oil", id: "2" },
-    { label: "Watercolor Paint", value: "watercolor", id: "3" },
-    { label: "Gouache Paint", value: "gouache", id: "4" },
-  ];
-
-  // Dummy onChange handler
-  const handleChoiceChange = (selectedValues: any) => {
-    console.log("Selected values:", selectedValues);
-  };
 
   console.log(products);
 
@@ -25,11 +20,20 @@ export default async function AddPaintsPage() {
     <>
       <h2>Add paints to your profile</h2>
 
-      <MultipleChoiceList
-        options={dummyOptions}
-        name="paints"
-        onChange={handleChoiceChange}
-      />
+      <form>
+        {products.map((product) => (
+          <div key={product.id}>
+            <input
+              type="checkbox"
+              id={product.id}
+              name={product.name}
+              checked={product.hasproduct}
+            />
+            <label htmlFor={product.name}>{product.name}</label>
+          </div>
+        ))}
+        <button type="submit">Submit</button>
+      </form>
     </>
   );
 }

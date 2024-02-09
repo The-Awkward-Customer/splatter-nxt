@@ -33,7 +33,7 @@ export default function CheckboxPrimitive({
         checked={checked}
         name={name}
         value={value}
-        onCheckedChange={onChange}
+        // onCheckedChange={onChange}
       >
         <Checkbox.Indicator className="CheckboxIndicator" id={id}>
           <CheckIcon />

@@ -10,15 +10,13 @@ interface InputDefinition {
   placeholder?: string;
 }
 
+interface CheckboxGroupDefinition {}
+
 interface FormComponentProps {
   inputs: InputDefinition[];
   submitButtonLabel: string;
 }
 
 export default function SimpleForm() {
-  return (
-    <>
-      <button ty> submit </button>
-    </>
-  );
+  return <form className="SimpleForm">inputs</form>;
 }
